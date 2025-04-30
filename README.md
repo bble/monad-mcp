@@ -2,6 +2,10 @@
 
 This project demonstrates how to create a MCP server that interacts with the Monad testnet. The MCP server provides a tool for checking MON token balances on the Monad testnet.
 
+<a href="https://glama.ai/mcp/servers/@bble/monad-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@bble/monad-mcp/badge" alt="Monad MCP server" />
+</a>
+
 ## What is MCP?
 
 The Model Context Protocol (MCP) is a standard that allows AI models to interact with external tools and services. 
@@ -151,7 +155,6 @@ server.tool(
 );
 ```
 
-
 ### Initialize the transport and server from the `main` function
 
 ```ts
@@ -219,4 +222,3 @@ Here's the final result
 - [Model Context Protocol Documentation](https://modelcontextprotocol.io/introduction)
 - [Monad Documentation](https://docs.monad.xyz/)
 - [Viem Documentation](https://viem.sh/)
-
