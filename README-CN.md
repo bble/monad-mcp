@@ -46,27 +46,6 @@ const server = new McpServer({
 
 ### 实现余额查询功能
 
-首先，我们来看一下 `get-mon-balance` 功能的基本框架：
-
-```ts
-server.tool(
-    // 功能标识符
-    "get-mon-balance",
-    // 功能说明
-    "查询 Monad 测试网地址的 MON 代币余额",
-    // 参数定义
-    {
-        address: z.string().describe("需要查询的 Monad 测试网地址"),
-    },
-    // 功能实现
-    async ({ address }) => {
-        // 余额查询逻辑
-    }
-);
-```
-
-接下来，让我们完善余额查询的具体实现：
-
 ```ts
 server.tool(
     // 功能标识符
@@ -173,7 +152,7 @@ Claude > 设置 > 开发者选项
 
 效果展示
 
-![final result](/static/final_result.gif)
+![final result](/static/final_result.png)
 
 ## 相关资源
 
