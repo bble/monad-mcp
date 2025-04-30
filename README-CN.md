@@ -89,6 +89,62 @@ server.tool(
     }
 );
 ```
+### 查询 NFT 数量的功能
+```
+server.tool(
+    // 功能标识符
+    "get-nft-count",
+    // 功能说明
+    "查询 Monad 测试网地址持有的 NFT 数量",
+    // 参数定义
+    {
+        address: z.string().describe("需要查询的 Monad 测试网地址"),
+        nftContract: z.string().describe("NFT 合约地址")
+    },
+    // 功能实现
+    async ({ address, nftContract }) => {
+        try {
+            // 调用合约的 balanceOf 方法查询 NFT 数量
+            const balance = await publicClient.readContract({
+                address: nftContract as `0x${string}`,
+                abi: [
+                    {
+                        inputs: [{ name: "owner", type: "address" }],
+                        name: "balanceOf",
+                        outputs: [{ name: "", type: "uint256" }],
+                        stateMutability: "view",
+                        type: "function"
+                    }
+                ],
+                functionName: "balanceOf",
+                args: [address as `0x${string}`]
+            });
+
+            // 返回格式化的查询结果
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `地址 ${address} 在合约 ${nftContract} 中持有的 NFT 数量为：${balance.toString()} 个`,
+                    },
+                ],
+            };
+        } catch (error) {
+            // 错误处理
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `查询地址 ${address} 的 NFT 数量失败：${
+                        error instanceof Error ? error.message : String(error)
+                        }`,
+                    },
+                ],
+            };
+        }
+    }
+);
+```
 
 ### 启动服务器
 

@@ -46,26 +46,6 @@ const server = new McpServer({
 
 ### Defining the MON balance tool
 
-Below is the scaffold of the `get-mon-balance` tool:
-
-```ts
-server.tool(
-    // Tool ID 
-    "get-mon-balance",
-    // Description of what the tool does
-    "Get MON balance for an address on Monad testnet",
-    // Input schema
-    {
-        address: z.string().describe("Monad testnet address to check balance for"),
-    },
-    // Tool implementation
-    async ({ address }) => {
-        // code to check MON balance
-    }
-);
-```
-
-Let's add the MON balance check implementation to the tool:
 
 ```ts
 server.tool(
