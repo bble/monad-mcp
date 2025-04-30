@@ -91,6 +91,67 @@ server.tool(
 );
 ```
 
+### Add functionality to query NFT count
+
+
+```
+### Add functionality to query NFT count
+server.tool(
+    // Function identifier
+    "get-nft-count",
+    // Function description
+    "Query the number of NFTs held by an address on the Monad testnet",
+    // Parameter definition
+    {
+        address: z.string().describe("The Monad testnet address to query"),
+        nftContract: z.string().describe("NFT contract address")
+    },
+    // Function implementation
+    async ({ address, nftContract }) => {
+        try {
+            // Call the contract's balanceOf method to get the NFT count
+            const balance = await publicClient.readContract({
+                address: nftContract as `0x${string}`,
+                abi: [
+                    {
+                        inputs: [{ name: "owner", type: "address" }],
+                        name: "balanceOf",
+                        outputs: [{ name: "", type: "uint256" }],
+                        stateMutability: "view",
+                        type: "function"
+                    }
+                ],
+                functionName: "balanceOf",
+                args: [address as `0x${string}`]
+            });
+
+            // Return the formatted query result
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `The address ${address} holds ${balance.toString()} NFTs in contract ${nftContract}.`,
+                    },
+                ],
+            };
+        } catch (error) {
+            // Error handling
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `Failed to query NFT count for address ${address}: ${
+                        error instanceof Error ? error.message : String(error)
+                        }`,
+                    },
+                ],
+            };
+        }
+    }
+);
+```
+
+
 ### Initialize the transport and server from the `main` function
 
 ```ts
