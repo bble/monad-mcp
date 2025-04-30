@@ -212,7 +212,7 @@ Claude > Settings > Developer
 
 Here's the final result
 
-![final result](/static/final_result.gif)
+![final result](/static/final_result.png)
 
 ## Further Resources
 
